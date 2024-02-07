@@ -68,5 +68,6 @@ this.physics.add.collider(player, platforms);
 }
 
 function update() {
+   
 
 }
