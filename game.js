@@ -81,8 +81,15 @@ stars.children.iterate(function (child) {
     child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
 
 });
-//Додали зіткнення зірок з платформами
+//Додали зіткнення зірок з платформами 9
 this.physics.add.collider(stars, platforms);
+//Перевіримо чи перекривається персонаж зіркою 10
+this.physics.add.overlap(player, stars, collectStar, null, this);
+//Додали збирання зірок персонажем 11
+function collectStar (player, star)
+{
+    star.disableBody(true, true);
+}
 }
 
 function update() {
