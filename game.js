@@ -142,6 +142,7 @@ function collectStar(player, star)
     var x = Phaser.Math.Between(0, config.width);
     var y = Phaser.Math.Between(0, config.height);
     var bomb = bombs.create(x, y, 'bomb');
+    bomb.setScale(0.25);
     bomb.setBounce(1);
     bomb.setCollideWorldBounds(true);
     bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
