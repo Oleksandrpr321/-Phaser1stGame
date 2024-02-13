@@ -138,23 +138,24 @@ function collectStar(player, star)
     score += 10;
     scoreText.setText('Score: ' + score);
 
-    if (stars.countActive(true) === 0)
+    // Створення бомби
+    var x = Phaser.Math.Between(0, config.width);
+    var y = Phaser.Math.Between(0, config.height);
+    var bomb = bombs.create(x, y, 'bomb');
+    bomb.setBounce(1);
+    bomb.setCollideWorldBounds(true);
+    bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+
+    if (stars.countActive(true) === 0) // Перевірка, чи всі зірки зібрані
     {
+        // Створення нових зірок
         stars.children.iterate(function (child) {
-
             child.enableBody(true, child.x, 0, true, true);
-
+            child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
         });
-
-        var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
-
-        var bomb = bombs.create(x, 16, 'bomb');
-        bomb.setBounce(1);
-        bomb.setCollideWorldBounds(true);
-        bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
-        bomb.allowGravity = false;
     }
 }
+
 function hitBomb(player, bomb) 
 {
     this.physics.pause();
